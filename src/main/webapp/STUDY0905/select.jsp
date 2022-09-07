@@ -38,7 +38,7 @@
 	System.out.println("디비 연결 성공!");
 
 	// 3. SQL 작성 & pstmt
-	String sql = "select * from itwill_member1 order by idx desc";
+	String sql = "select * from itwill_member order by idx desc";
 	System.out.println("SQL 구문 작성 완료!");
 	PreparedStatement pstmt = con.prepareStatement(sql);
 	
