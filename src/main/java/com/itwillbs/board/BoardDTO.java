@@ -19,7 +19,5 @@ public class BoardDTO {
 	private String ip;
 	private String file;
 	
-
-	
 	
 }
