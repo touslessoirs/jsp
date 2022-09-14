@@ -20,4 +20,5 @@ public class BoardDTO {
 	private String file;
 	
 	
+	
 }
