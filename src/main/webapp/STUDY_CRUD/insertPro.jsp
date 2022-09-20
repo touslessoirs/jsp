@@ -32,7 +32,7 @@
 	Class.forName(DRIVER);
 	System.out.println("드라이버 로드 성공!");
 	
-	// 2. 디비 연결
+	// 2. DB 연결
 	Connection con = DriverManager.getConnection(DBURL, DBID, DBPW);
 	System.out.println("디비 연결 성공!");
 	System.out.println(" con : "+con);
