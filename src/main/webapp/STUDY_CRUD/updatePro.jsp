@@ -30,17 +30,17 @@
 	
 	// 1. 드라이버 로드
 	Class.forName(DRIVER);
-	System.out.println("드라이버 로드 성공!");
+	System.out.println(" 드라이버 로드 성공!");
 	
 	// 2. 디비 연결
 	Connection con = DriverManager.getConnection(DBURL, DBID, DBPW);
-	System.out.println("디비 연결 성공!");
+	System.out.println(" DB 연결 성공!");
 	System.out.println(" con : "+con);			
 	
 	// 3. SQL 작성 & pstmt
 	// 먼저 해당 idx의 유저가 존재하는지를 판단
 	String sql = "select * from itwill_member where idx=?";
-	System.out.println("SQL 구문 작성 완료!");
+	System.out.println(" SQL 구문 작성 완료!");
 	PreparedStatement pstmt = con.prepareStatement(sql);
 	
 	// ?????
@@ -48,7 +48,7 @@
 	
 	// 4. SQL 실행
 	ResultSet rs = pstmt.executeQuery();
-	System.out.println("SQL 구문 실행 완료!");
+	System.out.println(" SQL 구문 실행 완료!");
 	
 	// 5. 데이터 실행
 	if(rs.next()){
