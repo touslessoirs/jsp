@@ -61,10 +61,10 @@
 	System.out.println("SQL 실행 완료!");
 	%>
 	
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		alert('회원 가입 완료!');
 		location.href="loginPro.jsp";
-	</script>
+	</script> -->
 	
 </body>
 </html>

@@ -72,14 +72,12 @@ public class MemberBean {
 		this.regdate = regdate;
 	}
 
-	// Alt + Shift + S + S
-	// 멤버빈 클래스에 들어있는 변수의 값을 한 번에 출력하는 메서드
-	// 객체안에 뭐가 들어있는지 보여줌
 	@Override
 	public String toString() {
 		return "MemberBean [id=" + id + ", pw=" + pw + ", name=" + name + ", age=" + age + ", gender=" + gender
 				+ ", email=" + email + ", regdate=" + regdate + "]";
 	}
 	
+
 	
 }
