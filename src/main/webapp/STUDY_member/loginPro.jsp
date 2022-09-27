@@ -58,8 +58,8 @@
 			response.sendRedirect("loginForm.jsp");
 			%>
 				<script type="text/javascript">
-					alert("비밀번호가 다릅니다!"");
-					history.back;
+					alert('비밀번호가 다릅니다!');	// @ 얘는 왜 안될까
+					history.go(-1);
 				</script>
 			<%
 		}
@@ -68,7 +68,8 @@
 		%>
 		<script type="text/javascript">
 			alert('회원정보가 없습니다!');
-			history.back;
+			history.go(-1);
+			// history.back; // @@ 이건 왜 안될까
 		</script>
 	<%
 	}
