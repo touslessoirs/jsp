@@ -50,18 +50,28 @@
 	MemberBean mb = null;		// 미리 객체를 생성하지 않고
 	if(rs.next()){				// if문을 거쳐서 데이터가 있을 때만 객체를 생성하므로
 		mb = new MemberBean();	// 메모리의 효율적인 사용이 가능해진다
-	    mb.setAge(rs.getInt("age"));
-	    mb.setEmail(rs.getString("email"));
-	    mb.setGender(rs.getString("gender"));
 	    mb.setId(rs.getString("id"));
-	    mb.setName(rs.getString("Name"));
 	    mb.setPw(rs.getString("pw"));
+	    mb.setName(rs.getString("Name"));
+	    mb.setAge(rs.getInt("age"));
+	    mb.setGender(rs.getString("gender"));
+	    mb.setEmail(rs.getString("email"));
 	    mb.setRegdate(rs.getTimestamp("regdate"));
 	}
 	
 	%>
 	
-	<%=mb.toString() %>
+	<%=mb.toString() %><hr>
+	
+	아이디 : <%=mb.getId() %><br>
+	비밀번호 : <%=mb.getPw() %><br>
+	이름 : <%=mb.getName() %><br>
+	나이 : <%=mb.getAge() %><br>
+	성별 : <%=mb.getGender() %><br>
+	이메일 : <%=mb.getEmail() %><br>
+	회원가입일 : <%=mb.getRegdate() %><br>
+	
+	
 	<hr>
 	<a href="main.jsp">메인페이지</a>
 	
