@@ -18,7 +18,7 @@
             성별 : <input type="radio" name="gender" value="남">남
                   <input type="radio" name="gender" value="여">여<br>
             이메일 : <input type="text" name="email"><br>
-            <hr><hr>
+            <hr>
             <input type="submit" value="회원가입하기">
 		</form>
 	

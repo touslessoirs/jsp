@@ -55,11 +55,12 @@
 		} else {
 			// pw 불일치 => 비밀번호 오류
 			// 페이지 뒤로가기
-			response.sendRedirect("loginForm.jsp");
+// 			response.sendRedirect("loginForm.jsp");	// jsp코드가 먼저 인식되면 아래의 js태그는 인식되지않음
 			%>
 				<script type="text/javascript">
-					alert('비밀번호가 다릅니다!');	// @ 얘는 왜 안될까
-					history.go(-1);
+					alert('비밀번호가 다릅니다!');
+					history.back();
+// 					history.go(-1);
 				</script>
 			<%
 		}
@@ -68,8 +69,8 @@
 		%>
 		<script type="text/javascript">
 			alert('회원정보가 없습니다!');
-			history.go(-1);
-			// history.back; // @@ 이건 왜 안될까
+			history.back();
+//			history.go(-1);
 		</script>
 	<%
 	}
