@@ -21,9 +21,22 @@ public class MemberDAO {
 	}
 	
 	// DB 연결 메서드 - getConnection()
-//	private Connection getConnection() throws Exception {
-//
-//	}
+	private Connection getConnection() throws Exception {
+		
+		// DB연결정보(상수)
+		final String DRIVER = "com.mysql.cj.jdbc.Driver";
+		final String DBURL = "jdbc:mysql://localhost:3306/jspex";
+		final String DBID = "root";
+		final String DBPW = "1234";
+		// 1. 드라이버 로드
+		Class.forName(DRIVER);
+	    System.out.println(" 드라이버 로드 성공!");
+	    // 2. DB연결
+	    con = DriverManager.getConnection(DBURL, DBID, DBPW);
+	    System.out.println(" DAO : DB 연결 성공");
+	    System.out.println(" con : "+con);
+	    return con;
+	}
 	// DB 연결 메서드 - getConnection()
 	
 }	// MemberDAO 클래스 끝
