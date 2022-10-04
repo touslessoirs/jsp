@@ -25,7 +25,9 @@
 	<input type="button" value="로그아웃" onclick="location.href='logoutPro.jsp'"><br>
 
 	<a href="memberInfo.jsp">회원정보 조회</a>
-	<a href="memberUpdate.jsp">회원정보 수정</a><br>
+	<a href="memberUpdate.jsp">회원정보 수정</a>
+	<a href="memberDelete.jsp">회원정보 삭제</a><br>
+	
 
 </body>
 </html>

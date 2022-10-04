@@ -174,6 +174,49 @@ public class MemberDAO {
 	}
 	// 정보 수정 메서드 - updateMember()
 	
-	
+	// 정보 삭제 메서드()
+    // id는 세션에서, pw는 getParameter에서 꺼내옴
+	public int memberDelete(String id, String pw) {
+	    // result 변수 선언
+	    int result = -1;
+	    try {		
+	        // 1. 드라이버 로드 + 2. 디비 연결
+	        con = getConnection();
+	        // 3. SQL 작성(select) & pstmt
+	        // 비밀번호 일치 확인
+	        sql = "select pw from itwill_member where id=?";
+	        pstmt = con.prepareStatement(sql);
+	        // ???
+	        pstmt.setString(1, id);
+	        // 4. SQL문 실행
+	        rs = pstmt.executeQuery();
+	        // 5. 데이터 처리
+	        if(rs.next()) {
+	            if(pw.equals(rs.getString("pw"))) {
+					// 본인 => 정보 삭제
+	                // 3. SQL 작성(delete) & pstmt
+	                sql = "delete from itwill_member where id=?";
+	                pstmt = con.prepareStatement(sql);
+	                pstmt.setString(1, id);
+	                // 4. sql 실행
+	                // result = 1;
+	                result = pstmt.executeUpdate();
+	                // executeUpdate() : sql구문을 실행했을 때 테이블에 영향을 준 row 수(int)를 리턴
+	            } else {
+	                result = 0;
+	            }
+	        } else {
+	            result = -1;
+	        }
+
+	        System.out.println(" DAO : 회원정보 삭제 완료["+result+"]");
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }		
+
+	    return result;
+	}
+	// 정보 삭제 메서드()
 	
 }	// MemberDAO 클래스 끝
