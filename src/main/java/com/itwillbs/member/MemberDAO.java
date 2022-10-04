@@ -186,7 +186,6 @@ public class MemberDAO {
 	        // 비밀번호 일치 확인
 	        sql = "select pw from itwill_member where id=?";
 	        pstmt = con.prepareStatement(sql);
-	        // ???
 	        pstmt.setString(1, id);
 	        // 4. SQL문 실행
 	        rs = pstmt.executeQuery();
@@ -218,5 +217,44 @@ public class MemberDAO {
 	    return result;
 	}
 	// 정보 삭제 메서드()
+	
+	// 회원정보 조회(all) 메서드 - memberList()
+	public ArrayList memberList() {
+		ArrayList mList = new ArrayList();
+		try {
+			// 1. 드라이버 로드 + 2. 디비 연결
+			con = getConnection();
+			// 3. SQL 작성(select) & pstmt
+			// 관리자(admin) 정보를 제외한 모든 회원의 정보 출력하기
+			sql = "select * from itwill_member where id!=?";
+	        pstmt = con.prepareStatement(sql);
+	        pstmt.setString(1, "admin");
+	        // 4. SQL문 실행
+	        rs = pstmt.executeQuery();
+			// 5. 데이터 처리 (모든 데이터를 출력하므로 while문 사용)
+	        while(rs.next()) {
+	        	
+	        	// DB 정보 MemberBean에 저장
+	        	MemberBean mb = new MemberBean();
+	            mb.setAge(rs.getInt("age"));
+	            mb.setEmail(rs.getString("email"));
+	            mb.setGender(rs.getString("Gender"));
+	            mb.setId(rs.getString("id"));
+	            mb.setName(rs.getString("name"));
+	            mb.setPw(rs.getString("pw"));
+	            mb.setRegdate(rs.getTimestamp("regdate"));
+	            
+	            // MemberBean => ArrayList에 저장
+	            mList.add(mb);
+	        }
+	        System.out.println(" DAO : 회원목록 조회 성공!");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return mList;
+	}
+	// 회원정보 조회(all) 메서드 - memberList()
 	
 }	// MemberDAO 클래스 끝

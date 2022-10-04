@@ -27,7 +27,15 @@
 	<a href="memberInfo.jsp">회원정보 조회</a>
 	<a href="memberUpdate.jsp">회원정보 수정</a>
 	<a href="memberDelete.jsp">회원정보 삭제</a><br>
-	
+	<%
+	// JSP 페이지의 실행 순서? ㅜㅜㅜㅜ
+	if(id!=null){
+		if(id.equals("admin")){%>
+			<hr>
+			<h4>관리자 전용 메뉴</h4>
+			<a href="memberList.jsp">회원정보 목록</a>
+		<%}
+	}%>
 
 </body>
 </html>
