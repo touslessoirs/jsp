@@ -22,9 +22,10 @@
 	<h3> <%=id %>님 환영합니다~~~ </h3>
 	
 	<hr>
-	<input type="button" value="로그아웃" onclick="location.href='logoutPro.jsp'">
+	<input type="button" value="로그아웃" onclick="location.href='logoutPro.jsp'"><br>
 
-	<a href="memberInfo.jsp">회원정보 조회</a><br>
+	<a href="memberInfo.jsp">회원정보 조회</a>
+	<a href="memberUpdate.jsp">회원정보 수정</a><br>
 
 </body>
 </html>
