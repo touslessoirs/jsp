@@ -124,8 +124,56 @@ public class MemberDAO {
 		System.out.println(" 정보 조회 완료! mb 리턴");
 		return mb;
 	}
-	
 	// 정보 조회 메서드 - getMember()
+	
+	// 정보 수정 메서드 - updateMember()
+	public int updateMember(MemberBean umb) {
+		int result = -1;	// 잘못된 상황(-1)을 default로 설정
+		try {
+			// 1. 드라이버 로드 + 2. DB 연결
+			con = getConnection();
+			// 비밀번호 일치 확인
+			// 3. SQL 작성(select) & pstmt
+			sql = "select pw from itwill_member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, umb.getId());
+			// 4. SQl문 실행
+			rs = pstmt.executeQuery();
+			// 5. 데이터 처리
+			if(rs.next()) {
+				// 입력한 id에 해당하는 pw 있음 => 회원
+				if (umb.getPw().equals(rs.getString("pw"))) {
+					// 입력한 pw = DB의 pw => 본인 => 정보 수정
+					// 3. SQL 작성(update) & pstmt
+					sql = "update itwill_member set name=?, age=?, gender=? where id=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, umb.getName());
+					pstmt.setInt(2, umb.getAge());
+					pstmt.setString(3, umb.getGender());
+					pstmt.setString(4, umb.getId());
+					
+//					pstmt.executeUpdate();
+					result = pstmt.executeUpdate();
+				}
+				// 입력한 pw != DB의 pw => 비밀번호 불일치
+				else {
+					result = 0;
+				}
+			}
+			// 입력한 id에 해당하는 pw 없음 => 비회원
+			else {
+				result = -1;
+			}
+			System.out.println(" DAO : 정보 수정 완료 ["+result+"]");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	// 정보 수정 메서드 - updateMember()
+	
 	
 	
 }	// MemberDAO 클래스 끝
