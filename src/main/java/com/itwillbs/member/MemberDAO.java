@@ -126,6 +126,7 @@ public class MemberDAO {
 	}
 	// 정보 조회 메서드 - getMember()
 	
+	
 	// 정보 수정 메서드 - updateMember()
 	public int updateMember(MemberBean umb) {
 		int result = -1;	// 잘못된 상황(-1)을 default로 설정
@@ -174,7 +175,8 @@ public class MemberDAO {
 	}
 	// 정보 수정 메서드 - updateMember()
 	
-	// 정보 삭제 메서드()
+	
+	// 정보 삭제 메서드 - memberDelete()
     // id는 세션에서, pw는 getParameter에서 꺼내옴
 	public int memberDelete(String id, String pw) {
 	    // result 변수 선언
@@ -216,7 +218,8 @@ public class MemberDAO {
 
 	    return result;
 	}
-	// 정보 삭제 메서드()
+	// 정보 삭제 메서드 - MemberDelete()
+	
 	
 	// 회원정보 조회(all) 메서드 - memberList()
 	public ArrayList memberList() {
@@ -256,5 +259,6 @@ public class MemberDAO {
 		return mList;
 	}
 	// 회원정보 조회(all) 메서드 - memberList()
+	
 	
 }	// MemberDAO 클래스 끝
