@@ -164,7 +164,7 @@ public class BoardDAO {
 	// 글 정보 가져오기 메서드 - getBoardList()
 
 	
-	// 글 정보 가져오기 메서드 - getBoardList(int startRow, int pageSize)
+	// 글 정보 가져오기 메서드 - getBoardList(startRow, pageSize)
 	public ArrayList getBoardList(int startRow, int pageSize) {
 		System.out.println(" DAO : getBoardList() 호출");
 		
@@ -202,6 +202,7 @@ public class BoardDAO {
 	            boardList.add(dto);
 			}
 			
+			System.out.println(" DAO : 게시판 목록 조회 성공");
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -213,7 +214,7 @@ public class BoardDAO {
 	}
 	
 	
-	// 글 정보 가져오기 메서드 - getBoardList(int startRow, int pageSize)
+	// 글 정보 가져오기 메서드 - getBoardList(startRow, pageSize)
 	
 	
 	// 전체 글 개수 - getBoardCount()
@@ -251,7 +252,7 @@ public class BoardDAO {
 		try {
 			con = getConnection();
 			// 3. SQL 작성(update) & pstmt 객체
-			sql = "update itwill_board set readcount where bno=?";
+			sql = "update itwill_board set readcount=readcount+1 where bno=?";
 	        pstmt = con.prepareStatement(sql);
 	        // ?????
 	        pstmt.setInt(1, bno);
@@ -321,12 +322,12 @@ public class BoardDAO {
 		try {
 			con = getConnection();
 			// SQL 작성(select) & pstmt 객체
-			sql = "select * from itwill_board where bno=?";
+			sql = "select pass from itwill_board where bno=?";
 	        pstmt = con.prepareStatement(sql);
 	        pstmt.setInt(1, dto.getBno());	// bno (X)
 	        // 4. SQL 실행
 	        rs = pstmt.executeQuery();
-			// 5. 데이터 처리 (비밀번호 입력 확인)
+			// 5. 데이터 처리 (비밀번호 확인)
 	        if(rs.next()) {
 	        	if(dto.getPass().equals(rs.getString("pass"))) {
 	        		// 비밀번호 일치
@@ -348,7 +349,9 @@ public class BoardDAO {
 	        	// 게시판 글 없음
 	        	result = -1;
 	        }
-	        	
+	        
+	        System.out.println(" DAO : 게시판 정보 수정완료 ("+result+")");
+	        
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -360,4 +363,49 @@ public class BoardDAO {
 	}
 	// 게시글 수정 - updateBoard(DTO)
 
+	
+	// 게시글 삭제 - deleteBoard(bno, pass)
+	public int deleteBoard(int bno, String pass) {
+		
+		int result = -1;
+		
+		try {
+			con = getConnection();
+			// 3. SQL 작성(select) & pstmt 객체
+			sql = "select pass from itwill_board where bno=?";
+	        pstmt = con.prepareStatement(sql);
+	        pstmt.setInt(1, bno);
+	        // 4. SQL 실행
+	        rs = pstmt.executeQuery();
+	        // 5. 데이터 처리 (비밀번호 확인)
+	        if(rs.next()) {
+	        	if(pass.equals(rs.getString("pass"))) {
+	        		// 비밀번호 일치
+	        		// 3. SQL 작성(delete) & pstmt 객체
+	        		sql = "delete from itwill_board where bno=?";
+	                pstmt = con.prepareStatement(sql);
+	                pstmt.setInt(1, bno);
+	                // 4. SQL 실행
+	                result = pstmt.executeUpdate();
+	        	} else {
+		        	// 비밀번호 오류
+		        	result = 0;
+	        	}
+	        } else {
+	        	// 게시판 글 없음
+	        	result = -1;
+	        }
+	        
+	        System.out.println(" DAO : 게시판 정보 삭제완료 ("+result+")");
+	        
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return result;
+	}
+	// 게시글 삭제 - deleteBoard(bno, pass)
+	
 }
