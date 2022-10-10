@@ -311,4 +311,53 @@ public class BoardDAO {
 	    
 	}
 	// 게시글 정보 조회 - getBoard(bno)
+	
+	
+	// 게시글 수정 - updateBoard(DTO)
+	public int updateBoard(BoardDTO dto) {
+		
+		int result = -1;
+		
+		try {
+			con = getConnection();
+			// SQL 작성(select) & pstmt 객체
+			sql = "select * from itwill_board where bno=?";
+	        pstmt = con.prepareStatement(sql);
+	        pstmt.setInt(1, dto.getBno());	// bno (X)
+	        // 4. SQL 실행
+	        rs = pstmt.executeQuery();
+			// 5. 데이터 처리 (비밀번호 입력 확인)
+	        if(rs.next()) {
+	        	if(dto.getPass().equals(rs.getString("pass"))) {
+	        		// 비밀번호 일치
+	        		// 3. SQL 작성(update) & pstmt 객체
+	        		sql = "update itwill_board set subject=?, name=?, content=? where bno=?";
+	                pstmt = con.prepareStatement(sql);
+	                // ?????
+	                pstmt.setString(1, dto.getSubject());
+	                pstmt.setString(2, dto.getName());
+	                pstmt.setString(3, dto.getContent());
+	                pstmt.setInt(4, dto.getBno());
+	                // 4. SQL 실행
+	                result = pstmt.executeUpdate();
+	        	} else {
+	        	// 비밀번호 오류
+	        	result = 0;
+	        	}
+	        } else {
+	        	// 게시판 글 없음
+	        	result = -1;
+	        }
+	        	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return result;
+		
+	}
+	// 게시글 수정 - updateBoard(DTO)
+
 }
