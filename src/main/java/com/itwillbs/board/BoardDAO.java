@@ -216,9 +216,6 @@ public class BoardDAO {
 	// 글 정보 가져오기 메서드 - getBoardList(int startRow, int pageSize)
 	
 	
-	
-	
-	
 	// 전체 글 개수 - getBoardCount()
 	public int getBoardCount() {
 		int cnt = 0;
@@ -249,5 +246,69 @@ public class BoardDAO {
 	// 전체 글 개수 - getBoardCount()
 	
 	
+	// 조회수 1 증가 - updateReadcount(bno)
+	public void updateReadcount(int bno) {
+		try {
+			con = getConnection();
+			// 3. SQL 작성(update) & pstmt 객체
+			sql = "update itwill_board set readcount where bno=?";
+	        pstmt = con.prepareStatement(sql);
+	        // ?????
+	        pstmt.setInt(1, bno);
+	        // 4. SQL 실행
+	        pstmt.executeUpdate();
+	        
+	        System.out.println(" DAO : 조회수 1 증가 완료");
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	    	closeDB();
+	    }
+		
+	}
+	// 조회수 1 증가 - updateReadcount(bno)
 	
+	
+	// 게시글 정보 조회 - getBoard(bno)
+	public BoardDTO getBoard(int bno) {
+		BoardDTO dto = null;
+		
+		try {
+			con = getConnection();
+			// 3. SQL 작성(select) & pstmt 객체
+			sql = "select * from itwill_board where bno=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			// 4. SQL 실행
+			rs = pstmt.executeQuery();
+			// 5. 데이터 처리
+			if(rs.next()) {
+				dto = new BoardDTO();	// true일 때 객체 생성
+	            dto.setBno(rs.getInt("bno"));
+	            dto.setName(rs.getString("name"));
+	            dto.setPass(rs.getString("pass"));
+	            dto.setSubject(rs.getString("subject"));
+	            dto.setContent(rs.getString("content"));
+	            dto.setReadcount(rs.getInt("readcount"));
+	            dto.setRe_ref(rs.getInt("re_ref"));
+	            dto.setRe_lev(rs.getInt("re_lev"));
+	            dto.setRe_seq(rs.getInt("re_seq"));
+	            dto.setDate(rs.getDate("date"));
+	            dto.setIp(rs.getString("ip"));
+	            dto.setFile(rs.getString("file"));
+	        }
+
+	        System.out.println(" DAO : 게시글 조회 완료");
+	 
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        closeDB();
+	    }
+	 
+	    return dto;
+	    
+	}
+	// 게시글 정보 조회 - getBoard(bno)
 }

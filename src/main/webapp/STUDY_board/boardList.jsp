@@ -69,7 +69,9 @@
 
     <tr>
         <td><%=dto.getBno() %></td>
-        <td><%=dto.getSubject()%></td>
+        <td>
+        	<a href="boardContent.jsp?bno=<%=dto.getBno()%>&pageNum=<%=pageNum %>"><%=dto.getSubject() %></a>
+        </td>
         <td><%=dto.getName() %></td>
         <td><%=dto.getReadcount() %></td>
         <td><%=dto.getDate() %></td>
