@@ -52,6 +52,7 @@
 	%>
 
 	<h3><a href="writeForm.jsp">글쓰기</a></h3>
+	<h3><a href="fwriteForm.jsp">파일 글쓰기</a></h3>
 	<table border="1">
 	<tr>
         <th>번호</th>

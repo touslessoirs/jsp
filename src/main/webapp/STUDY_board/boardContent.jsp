@@ -51,7 +51,10 @@
 	    </tr>
 	    <tr>
 	        <td>첨부파일</td>
-	        <td colspan="3"><%=dto.getFile() %></td>
+	        <td colspan="3">
+		        <a href="../file/fileDown.jsp?file_name=<%=dto.getFile()%>"><%=dto.getFile() %></a>
+		        <a href="../upload/<%=dto.getFile()%>"><%=dto.getFile() %></a>
+	        </td>
 	    </tr>
 	    <tr>
 	        <td colspan="4">
