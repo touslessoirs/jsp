@@ -57,7 +57,7 @@
 	        <td colspan="4">
 	            <input type="button" value="수정" onclick="location.href='updateForm.jsp?bno=<%=dto.getBno()%>&pageNum=<%=pageNum%>';">
 				<input type="button" value="삭제" onclick="location.href='deleteForm.jsp?bno=<%=dto.getBno()%>&pageNum=<%=pageNum%>';">
-	            <input type="button" value="답글">
+	            <input type="button" value="답글" onclick="location.href='reWriteForm.jsp?bno=<%=dto.getBno()%>&re_ref=<%=dto.getRe_ref() %>&re_lev=<%=dto.getRe_lev() %>&re_seq=<%=dto.getRe_seq() %>';">
 	            <!-- 조회중이었던 페이지로 돌아가기 -->
 	            <input type="button" value="목록"
 	                onclick="location.href='boardList.jsp?pageNum=<%=pageNum%>';">

@@ -408,4 +408,76 @@ public class BoardDAO {
 	}
 	// 게시글 삭제 - deleteBoard(bno, pass)
 	
+	
+	// 답글쓰기 - reInsertBoard(DTO)
+	public void reInsertBoard(BoardDTO dto) {
+		
+		int bno = 0;
+		
+		try {
+			
+			// =========1) 글번호 계산(bno)=========
+			con = getConnection();
+			// 3. SQL 작성 (select) & pstmt 객체
+			sql = "select max(bno) from itwill_board";
+	        pstmt = con.prepareStatement(sql);
+	        // 4. SQL 실행
+	        rs = pstmt.executeQuery();
+	        // 5. 데이터 처리
+	        if(rs.next()) {
+	        	bno = rs.getInt(1)+1;
+	        }
+		
+	        System.out.println(" DAO : 답글 번호(bno) "+bno);
+	        
+	        // =========2) 답글 순서 재배치(re_seq)=========
+	        // 3. SQL 작성 (update) & pstmt 객체
+	        // 같은 그룹에 있으면서(re_ref=?) 기존의 re_seq보다 큰 값이 있을 때(re_seq>?)
+	        // (원글에 이전에 작성한 답글이 존재할 때)
+	        // => 이전에 작성한 답글을 한 칸씩 아래로 내린 후(re_seq=re_seq+1) 답글 작성
+	        sql = "update itwill_board set re_seq = re_seq+1 where re_ref=? and re_seq>?";
+	        pstmt = con.prepareStatement(sql);
+	        pstmt.setInt(1, dto.getRe_ref());
+	        pstmt.setInt(2, dto.getRe_seq());
+	        // 4. SQL 실행
+	        int cnt = pstmt.executeUpdate();
+	        
+	        if(cnt>0) {
+	        	System.out.println(" DAO : 답글 재정렬 완료");
+	        }
+	        
+	        // =========3) 답글 쓰기=========
+	        // 3. SQL 작성 (insert) & pstmt 객체
+	        sql = "insert into itwill_board(bno, name, pass, subject, content, "
+	                + "readcount, re_ref, re_lev, re_seq, date, ip, file) "
+	                + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, now(), ?, ?)";
+	        pstmt = con.prepareStatement(sql);
+	        // ?????
+	        pstmt.setInt(1, bno);
+	        pstmt.setString(2, dto.getName());
+	        pstmt.setString(3, dto.getPass());
+	        pstmt.setString(4, dto.getSubject());
+	        pstmt.setString(5, dto.getContent());
+	 
+	        pstmt.setInt(6, 0);
+	        pstmt.setInt(7, dto.getRe_ref());	// 원글과 동일
+	        pstmt.setInt(8, dto.getRe_lev()+1);
+	        pstmt.setInt(9, dto.getRe_seq()+1);
+	 
+	        pstmt.setString(10, dto.getIp());
+	        pstmt.setString(11, dto.getFile());
+	 
+	        // 4. SQL 실행
+	        pstmt.executeUpdate();
+	        
+	        System.out.println(" DAO : 답글 쓰기 완료!");
+	        
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 답글쓰기 - reInsertBoard(DTO)
+	
+	
 }

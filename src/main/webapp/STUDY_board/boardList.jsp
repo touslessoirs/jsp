@@ -70,6 +70,14 @@
     <tr>
         <td><%=dto.getBno() %></td>
         <td>
+        	<%
+        	if(dto.getRe_lev()>0){
+       		%>
+        		<img src="../img/level.gif" width="<%=dto.getRe_lev()*10%>">
+				<img src="../img/re.gif">
+			<%        	
+        	}
+        	%>
         	<a href="boardContent.jsp?bno=<%=dto.getBno()%>&pageNum=<%=pageNum %>"><%=dto.getSubject() %></a>
         </td>
         <td><%=dto.getName() %></td>
