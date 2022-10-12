@@ -20,5 +20,6 @@
 	        <input type="submit" value="파일 글쓰기">
 	    </form>
 	</fieldset>
+	
 </body>
 </html>

@@ -47,5 +47,6 @@
 	response.sendRedirect("boardList.jsp");
 	
 	%>
+	
 </body>
 </html>
