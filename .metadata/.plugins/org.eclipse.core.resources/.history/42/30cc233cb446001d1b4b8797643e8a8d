@@ -1,0 +1,132 @@
+package com.itwillbs.action;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+// 컨트롤러 => 서블릿 이동
+
+@WebServlet("*.bo")	// ~~~.bo 주소의 형태면 해당 컨트롤러가 처리하겠다는 의미
+public class BoardFrontController extends HttpServlet {
+// http://localhost:8088/MVC/board (web.xml 매핑)
+// http://localhost:8088/MVC/board2 (@ 매핑)
+
+	// doGet, doPost는 각각 방식을 구분해서 처리
+	// 한 번에 처리하기 위해서 HttpServlet에 없는 doProcess()메서드 정의
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(" BoardFrontController - doProcess() 호출");
+		System.out.println(" GET / POST 방식 상관없이 한 번에 처리");
+	
+	//========================1. 가상주소 계산========================
+
+		// URL : 웹 실행 주소
+		// URI : URL에서 프로토콜, IP, 포트번호를 뺀 것
+//		System.out.println(request.getRequestURL());	
+//		System.out.println(request.getRequestURI());
+		System.out.println(" C : (1단계 시작) 가상주소 계산 시작==========");
+		String requestURI = request.getRequestURI();
+		System.out.println(" C : requestURI : "+requestURI);
+		
+		String ctxPath = request.getContextPath();
+		System.out.println(" C : ctxPath : "+ctxPath);
+		
+		String command = requestURI.substring(ctxPath.length());
+		System.out.println(" C : command : "+command);
+		
+		System.out.println(" C : (1단계 끝) 가상주소 계산 완료==========");
+	
+	//========================1. 가상주소 계산========================
+	
+	//========================2. 가상주소 매핑========================
+	
+		System.out.println(" C : (2단계 시작) 가상주소 매핑 시작==========");
+		
+//		if(command.equals("/test.bo")) {
+//			System.out.println(" C : /test.bo 호출");
+//		}
+		
+		Action action = null;	// 인터페이스를 통해 만든 객체 생성 *2
+		ActionForward forward = null;
+
+		// true(isRedirect)/false(forward) 결정하는 기준 : 현재 페이지의 주소, 내가 이동할 곳의 주소
+		// ~~~.bo 가상 주소는 그대로 둔 채 내용만 바껴야 하므로 false!
+		if(command.equals("/BoardWrite.bo")) {
+			System.out.println(" C : /BoardWrite.bo 호출");
+			System.out.println(" C : [패턴1] DB사용 X, view페이지 이동");
+			
+			forward = new ActionForward();
+			forward.setPath("./board/writeForm.jsp");
+			forward.setRedirect(false);
+		}
+		else if(command.equals("/BoardWriteAction.bo")) {
+			System.out.println(" C : /BoardWriteAction.bo 호출");
+			System.out.println(" C : [패턴2] DB사용 O, 페이지 이동(화면전환)");	// DB사용+boardList로 이동
+		
+			// 'BoardWriteAction() 객체' 생성
+			// 강한 결합 (결합도가 높다)
+			// 하나만 잘못돼도 다 뜯어고쳐야함... 종속적, 의존적
+//			BoardWriteAction bwa = new BoardWriteAction();
+			
+			// 약한 결합 (결합도가 낮다)
+			// 'Action 인터페이스를 통해 만든 BoardWriteAction 객체' 생성
+			action = new BoardWriteAction();	// 업캐스팅, 상속관계 유추 *2
+			
+			try {
+//				forward = bwa.execute(request, response);
+				forward = action.execute(request, response);	// 티켓(forward) 받아옴 *1
+				// 반드시 request, response를 받아야지만 실행되게 만든 이유?
+				// BoardWriteAction.java에서 수동으로 만든 request, response를 전달받기 위함
+				// cf) 파라미터 값 처리해야 하므로 request, response 사용
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println(" C : (2단계 끝) 가상주소 매핑 완료==========");
+		
+	//========================2. 가상주소 매핑========================
+	
+	//========================3. 페이지 이동========================
+	
+		System.out.println(" C : (3단계 끝) 페이지 이동 시작==========");
+		
+		if(forward != null) { // 이동정보가 있을때(티켓이 있을때)
+			
+			if(forward.isRedirect()) { // 	// 이 자체로 true이므로 굳이 부등호 사용할 필요X
+				System.out.println(" C : 이동방식 : "+forward.isRedirect()+",주소 : "+forward.getPath());
+				response.sendRedirect(forward.getPath());
+				
+			}else {// false
+				System.out.println(" C : 이동방식 : "+forward.isRedirect()+",주소 : "+forward.getPath());
+				
+				RequestDispatcher dis 
+				      = request.getRequestDispatcher(forward.getPath());
+				dis.forward(request, response);				
+			}
+			
+		}
+		
+		System.out.println(" C : (3단계 끝) 페이지 이동 완료==========");
+		
+	//========================3. 페이지 이동========================
+	
+	}	// doProcess() 끝
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(" \n\n BoardFrontController - doGet() 호출");
+		doProcess(request, response);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(" \n\n BoardFrontController - doPost() 호출");
+		doProcess(request, response);
+	}
+
+}

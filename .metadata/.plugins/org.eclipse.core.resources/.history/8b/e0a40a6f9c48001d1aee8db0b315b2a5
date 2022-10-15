@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>boardContent.jsp</h1>
+	<%
+	// 주소줄에서 넘어온 글 정보 가져오기
+	int bno = Integer.parseInt(request.getParameter("bno"));
+	
+	// 주소줄에서 넘어온 페이지 정보 가져오기
+	String pageNum = request.getParameter("pageNum");
+	
+	%>
+</body>
+</html>

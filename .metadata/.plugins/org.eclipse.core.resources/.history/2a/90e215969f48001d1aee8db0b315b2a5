@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>updatePro.jsp</h1>
+	
+	<%
+	request.setCharacterEncoding("UTF-8");
+	
+	// 전달 정보(pageNum) 저장
+	
+	// 전달된 정보 (수정할 데이터 - bno, name, pass, subject, content) 저장 - 액션태그
+	%>
+	<jsp:useBean id="dto" class="com.itwillbs.board.BoardDTO"/>
+	<jsp:setProperty property="*" name="dto"/>
+	
+	%>
+
+</body>
+</html>
