@@ -1,5 +1,5 @@
-GitRepositoriesView.GitDirectories=C\:\\workspace\\workspace_jsp\\JSP_STUDY\\.git;
-GitRepositoriesView.GitDirectories.relative=JSP_STUDY\\.git;
+GitRepositoriesView.GitDirectories=C\:\\workspace\\workspace_jsp\\.git;C\:\\workspace\\workspace_jsp\\JSP_STUDY\\.git;
+GitRepositoriesView.GitDirectories.relative=.git;JSP_STUDY\\.git;
 RepositoryGroups.uuids=
 RepositorySearchDialogSearchPath=C\:\\Users\\MJ\\git
 eclipse.preferences.version=1
