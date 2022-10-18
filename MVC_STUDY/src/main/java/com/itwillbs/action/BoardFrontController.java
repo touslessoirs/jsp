@@ -39,11 +39,12 @@ public class BoardFrontController extends HttpServlet {
 		
 		System.out.println("\n [C] 2단계 : 가상주소 매핑 시작");
 		
+		Action action = null;
 		ActionForward forward = null;
 
 		if(command.equals("/BoardWrite.bo")) {
 			System.out.println(" [C] /BoardWrite.bo 호출");
-			System.out.println(" [C] [패턴 1] DB사용 X, view 페이지 출력");
+			System.out.println(" [C] [패턴 1] DB사용 X, view 페이지 출력");	// writeForm.jsp
 			
 			forward = new ActionForward();
 			forward.setPath("./board/writeForm.jsp");
@@ -51,6 +52,47 @@ public class BoardFrontController extends HttpServlet {
 			
 		}	// BoardWrite.bo
 		
+		else if(command.equals("/BoardWriteAction.bo")) {
+			System.out.println(" [C] /BoardWriteAction.bo 호출");
+			System.out.println(" [C] [패턴 2] DB사용 O, 페이지 이동");	// BoardList로 이동
+			
+			action = new BoardWriteAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}	// BoardWriteAction.bo
+		
+		else if(command.equals("/BoardList.bo")) {
+		    System.out.println(" C : /BoardList.bo 호출");
+		    System.out.println(" C : [패턴3] DB사용 O, view페이지 출력");	// boardList.jsp
+		    
+		    action = new BoardListAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}	// BoardList.bo
+		
+		else if(command.equals("/BoardContent.bo")) {
+		    System.out.println(" C : /BoardContent.bo 호출");
+		    System.out.println(" C : [패턴3] DB사용 O, view페이지 출력");	// boardContent.jsp
+
+		    action = new BoardContentAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}	// BoardContent.bo
 		
 		System.out.println(" [C] 2단계 : 가상주소 매핑 완료");
 		
