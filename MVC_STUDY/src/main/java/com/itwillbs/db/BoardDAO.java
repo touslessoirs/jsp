@@ -214,10 +214,10 @@ public class BoardDAO {
 		
 		try {
 			con = getConnection();
-			sql = "update itwill_member set readcount=readcount+1 where bno=?";
+			sql = "update itwill_board set readcount=readcount+1 where bno=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bno);
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 			
 			System.out.println(" [DAO] 조회수 1 증가");
 			
@@ -231,8 +231,68 @@ public class BoardDAO {
 	// 조회수 1 증가 - updateReadcount(bno)
 	
 	
+	// 게시글 수정 - updateBoard(DTO)
+	public int updateBoard(BoardDTO dto) {
+		
+		int result = -1;
+		
+		try {
+			con = getConnection();
+			sql = "select pass from itwill_board where bno=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, dto.getBno());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(dto.getPass().equals(rs.getString("pass"))) {
+					// 비밀번호 일치
+					sql = "update itwill_board set subject=?, name=?, content=? where bno=?";
+					pstmt = con.prepareStatement(sql);
+		    		pstmt.setString(1, dto.getSubject());
+		    		pstmt.setString(2, dto.getName());
+		    		pstmt.setString(3, dto.getContent());
+		    		pstmt.setInt(4, dto.getBno());
+					result = pstmt.executeUpdate();
+				} else {
+					// 비밀번호 불일치
+					result = 0;
+				}
+			} else {
+				// 게시판 글 없음
+				result = -1;
+			}
+			
+			System.out.println(" [DAO] 게시판 글 수정 결과 ("+result+")");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+				
+		return result;
+		
+	}
+	// 게시글 수정 - updateBoard(DTO)
+
 	
+	// 게시글 삭제 - deleteBoard(DTO)
+	public int deleteBoard(BoardDTO dto) {
+		
+		int result = -1;
+		
+		try {
+			con = getConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+	}
+	// 게시글 삭제 - deleteBoard(DTO)
 	
-	
+
+	// 답글 쓰기 - reInsertBoard(DTO)
+	// 답글 쓰기 - reInsertBoard(DTO)
 	
 }

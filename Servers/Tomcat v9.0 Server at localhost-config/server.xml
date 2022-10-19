@@ -154,7 +154,7 @@
 
       
       
-		<Context docBase="MVC_STUDY" path="/MVC_STUDY" reloadable="true" source="org.eclipse.jst.jee.server:MVC_STUDY"/><Context docBase="MVC" path="/MVC" reloadable="true" source="org.eclipse.jst.jee.server:MVC"/></Host>
+		<Context docBase="MVC_STUDY" path="/MVC_STUDY" reloadable="true" source="org.eclipse.jst.jee.server:MVC_STUDY"/><Context docBase="MVC" path="/MVC" reloadable="true" source="org.eclipse.jst.jee.server:MVC"/><Context docBase="JSP_STUDY" path="/JSP_STUDY" reloadable="true" source="org.eclipse.jst.jee.server:JSP_STUDY"/></Host>
     
     </Engine>
   </Service>

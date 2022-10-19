@@ -81,8 +81,8 @@ public class BoardFrontController extends HttpServlet {
 		}	// BoardList.bo
 		
 		else if(command.equals("/BoardContent.bo")) {
-		    System.out.println(" C : /BoardContent.bo 호출");
-		    System.out.println(" C : [패턴3] DB사용 O, view페이지 출력");	// boardContent.jsp
+		    System.out.println(" [C] /BoardContent.bo 호출");
+		    System.out.println(" [C] [패턴3] DB사용 O, view페이지 출력");	// boardContent.jsp
 
 		    action = new BoardContentAction();
 
@@ -94,17 +94,60 @@ public class BoardFrontController extends HttpServlet {
 			
 		}	// BoardContent.bo
 		
-		else if(command.equals("./BoardUpdate.bo")) {
+		else if(command.equals("/BoardUpdate.bo")) {
+			System.out.println(" [C] /BoardUpdate.bo 호출");
+		    System.out.println(" [C] [패턴3] DB사용 O, view페이지 출력");	// boardUpdate.jsp
 			
-		}
+			action = new BoardUpdateAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}	// BoardUpdate.bo
 		
-		else if(command.equals("./BoardDelete.bo")) {
+		else if(command.equals("/BoardUpdatePro.bo")) {
+			System.out.println(" [C] /BoardUpdatePro.bo 호출");
+			System.out.println(" [C] [패턴 2] DB사용 O, 페이지 이동");	// BoardList로 이동
 			
-		}
+			action = new BoardUpdateProAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}	// BoardUpdatePro.bo
 		
-		else if(command.equals("./ReWrite.bo")) {
+		
+		
+		
+		else if(command.equals("/BoardDelete.bo")) {
+			System.out.println(" [C] /BoardDeleteAction.bo 호출");
+			System.out.println(" [C] [패턴 2] DB사용 O, 페이지 이동");	// BoardList로 이동
 			
-		}
+			action = new BoardDeleteAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}	// BoardDelete.bo
+		
+		else if(command.equals("/BoardReWrite.bo")) {
+			System.out.println(" [C] /ReWrite.bo 호출");
+			System.out.println(" [C] [패턴 1] DB사용 X, view 페이지 출력");	// reWriteForm.jsp
+			
+			forward = new ActionForward();
+			forward.setPath("./board/reWriteForm.jsp");
+			forward.setRedirect(false);
+			
+		}	// BoardReWrite.bo
 		
 		
 		

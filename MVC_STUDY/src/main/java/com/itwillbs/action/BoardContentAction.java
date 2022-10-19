@@ -23,11 +23,11 @@ public class BoardContentAction implements Action {
 		dao.updateReadcount(bno);
 		System.out.println(" [M] 조회수 1 증가");
 		// DB에서 게시글 정보 가져오기 + 가져온 정보 DTO에 저장
-//		BoardDTO dto = dao.getBoardContent(bno);
+		BoardDTO dto = dao.getBoardContent(bno);
 		
 		// DTO & pageNum -> request 영역에 저장 (-> view 페이지 전달)
-//		request.setAttribute("dto", dto);
-		request.setAttribute("dto", dao.getBoardContent(bno));
+		request.setAttribute("dto", dto);
+//		request.setAttribute("dto", dao.getBoardContent(bno));
 		request.setAttribute("pageNum", pageNum);
 		
 		// 페이지 이동
