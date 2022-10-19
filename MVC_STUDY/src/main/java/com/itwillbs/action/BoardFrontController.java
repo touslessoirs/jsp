@@ -94,6 +94,21 @@ public class BoardFrontController extends HttpServlet {
 			
 		}	// BoardContent.bo
 		
+		else if(command.equals("./BoardUpdate.bo")) {
+			
+		}
+		
+		else if(command.equals("./BoardDelete.bo")) {
+			
+		}
+		
+		else if(command.equals("./ReWrite.bo")) {
+			
+		}
+		
+		
+		
+		
 		System.out.println(" [C] 2단계 : 가상주소 매핑 완료");
 		
 		//================2. 가상주소 매핑================

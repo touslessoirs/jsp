@@ -169,6 +169,70 @@ public class BoardDAO {
 	// 글 목록 조회하기 - getBoardList(startRow, pageSize)
 	
 	
+	// 글 내용 조회하기 - getBoardContent(bno)
+	public BoardDTO getBoardContent(int bno) {
+		
+		BoardDTO dto = null;
+		
+		try {
+			con = getConnection();
+			sql = "select * from itwill_board where bno=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				dto = new BoardDTO();
+	            dto.setBno(rs.getInt(1));
+	            dto.setName(rs.getString(2));
+	            dto.setPass(rs.getString(3));
+	            dto.setSubject(rs.getString(4));
+	            dto.setContent(rs.getString(5));
+	            dto.setReadcount(rs.getInt(6));
+	            dto.setRe_ref(rs.getInt(7));
+	            dto.setRe_lev(rs.getInt(8));
+	            dto.setRe_seq(rs.getInt(9));
+	            dto.setDate(rs.getDate(10));
+	            dto.setIp(rs.getString(11));
+	            dto.setFile(rs.getString(12));
+			}
+			
+			System.out.println(" [DAO] 게시글 조회 완료");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return dto;
+	}
+	// 글 내용 조회하기 - getBoardContent(bno)
+	
+	
+	// 조회수 1 증가 - updateReadcount(bno)
+	public void updateReadcount(int bno) {
+		
+		try {
+			con = getConnection();
+			sql = "update itwill_member set readcount=readcount+1 where bno=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			pstmt.executeQuery();
+			
+			System.out.println(" [DAO] 조회수 1 증가");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+	}
+	// 조회수 1 증가 - updateReadcount(bno)
+	
+	
+	
+	
 	
 	
 }

@@ -50,6 +50,9 @@ public class BoardListAction implements Action {
 		// 가져온 데이터 request 영역에 저장 -> view로 전달
 		request.setAttribute("boardList", boardList);
 		
+		// 페이징 처리 정보를 추가로 저장해야하므로 이 방법 사용X
+//		request.setAttribute("boardList", dao.getBoardList(startRow, pageSize))
+		
 		// 페이징 처리 정보 request 영역에 저장
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("totalCnt", cnt);
@@ -61,7 +64,7 @@ public class BoardListAction implements Action {
 		// 페이지 이동 -> boardList.jsp (view)
 		ActionForward forward = new ActionForward();
 		forward.setPath("./board/boardList.jsp");
-		forward.setRedirect(false);
+		forward.setRedirect(false);	// request -> 포워딩
 		
 		return forward;
 	}

@@ -154,9 +154,11 @@
 
       
       
-		<Context docBase="C:\workspace\workspace_jsp\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\workspace\workspace_jsp\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MVC_STUDY" path="/MVC_STUDY" reloadable="true" source="org.eclipse.jst.jee.server:MVC_STUDY"/><Context docBase="C:\workspace\workspace_jsp\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MVC" path="/MVC" reloadable="true" source="org.eclipse.jst.jee.server:MVC">
+		<Context docBase="C:\workspace\workspace_jsp\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\workspace\workspace_jsp\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MVC_STUDY" path="/MVC_STUDY" reloadable="true" source="org.eclipse.jst.jee.server:MVC_STUDY">
+	<Resource auth="Container" driverClassName="com.mysql.cj.jdbc.Driver" maxWait="5000" name="jdbc/mvcstudy" password="1234" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/jspex" username="root"/>
+</Context><Context docBase="C:\workspace\workspace_jsp\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MVC" path="/MVC" reloadable="true" source="org.eclipse.jst.jee.server:MVC">
 	<Resource auth="Container" driverClassName="com.mysql.cj.jdbc.Driver" maxWait="5000" name="jdbc/mvc" password="1234" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/jspdb" username="root"/>
-</Context></Host>
+</Context><Context docBase="C:\workspace\workspace_jsp\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\JSP_STUDY" path="/JSP_STUDY" reloadable="true" source="org.eclipse.jst.jee.server:JSP_STUDY"/></Host>
     
     </Engine>
   </Service>
