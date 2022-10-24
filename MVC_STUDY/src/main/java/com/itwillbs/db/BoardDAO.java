@@ -23,7 +23,7 @@ public class BoardDAO {
 	private Connection getConnection() throws Exception{
 		// 1+2. DB 연결
 		// Context 객체 생성
-		// naming - lookup()(jdbc 드라이버 찾기 위함)하기 전 프로젝트(Context)초기화
+		// naming - lookup()(jdbc 드라이버 찾기) 전 프로젝트(Context)초기화
 		Context initCTX = new InitialContext();
 		// DB 연동 정보 불러오기
 		DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/mvcstudy");

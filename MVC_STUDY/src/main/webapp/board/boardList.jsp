@@ -11,7 +11,7 @@
 	<h1>boardList (MVC).jsp</h1>
 
 	<h3><a href="./BoardWrite.bo">글쓰기</a></h3>
-	<h3><a href="./BoardfWrite.bo">첨부파일 글쓰기</a></h3>
+	<h3><a href="./BoardFileWrite.bo">첨부파일 글쓰기</a></h3>
 
 	<table border="1">
 	    <tr>

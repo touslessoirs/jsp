@@ -68,7 +68,7 @@ public class BoardFrontController extends HttpServlet {
 		
 		else if(command.equals("/BoardList.bo")) {
 		    System.out.println(" [C] /BoardList.bo 호출");
-		    System.out.println(" [C] [패턴3] DB사용 O, view 페이지 출력");	// boardList.jsp
+		    System.out.println(" [C] [패턴 3] DB사용 O, view 페이지 출력");	// boardList.jsp
 		    
 		    action = new BoardListAction();
 
@@ -82,7 +82,7 @@ public class BoardFrontController extends HttpServlet {
 		
 		else if(command.equals("/BoardContent.bo")) {
 		    System.out.println(" [C] /BoardContent.bo 호출");
-		    System.out.println(" [C] [패턴3] DB사용 O, view 페이지 출력");	// boardContent.jsp
+		    System.out.println(" [C] [패턴 3] DB사용 O, view 페이지 출력");	// boardContent.jsp
 
 		    action = new BoardContentAction();
 
@@ -96,7 +96,7 @@ public class BoardFrontController extends HttpServlet {
 		
 		else if(command.equals("/BoardUpdate.bo")) {
 			System.out.println(" [C] /BoardUpdate.bo 호출");
-		    System.out.println(" [C] [패턴3] DB사용 O, view 페이지 출력");	// boardUpdate.jsp
+		    System.out.println(" [C] [패턴 3] DB사용 O, view 페이지 출력");	// boardUpdate.jsp
 			
 			action = new BoardUpdateAction();
 			
@@ -170,6 +170,30 @@ public class BoardFrontController extends HttpServlet {
 			
 		}	// BoardReWriteAction.bo
 		
+		else if(command.equals("/BoardFileWrite.bo")) {
+			System.out.println(" [C] /BoardWrite.bo 호출");
+			System.out.println(" [C] [패턴 1] DB사용 X, view 페이지 출력");	// fWriteForm.jsp
+
+			forward = new ActionForward();
+			forward.setPath("./board/fWriteForm.jsp");
+			forward.setRedirect(false);
+			
+		}	// BoardFileWrite.bo
+		
+
+		else if(command.equals("/BoardFileWriteAction.bo")) {
+			System.out.println(" [C] /BoardfWriteAction.bo 호출");
+			System.out.println(" [C] [패턴 2] DB사용 O, 페이지 이동");	// BoardList로 이동
+			
+			action = new BoardFileWriteAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}	// BoardFileWriteAction.bo
 		
 		System.out.println(" [C] 2단계 : 가상주소 매핑 완료");
 		
