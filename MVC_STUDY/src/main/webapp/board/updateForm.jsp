@@ -15,10 +15,10 @@
 			<input type="hidden" name="bno" value="${dto.bno }">
 	        제목 : <input type="text" name="subject" value=${dto.subject }><br>
 	        작성자 : <input type="text" name="name" value=${dto.name }><br>
-	        비밀번호 : <input type="password" name="pass" value=${dto.pass }><br>
+	        비밀번호 : <input type="password" name="pass"><br>
 	        내용 : <textarea rows="10" cols="20" name="content">${dto.content }</textarea>
 	        <hr>
-	        <input type="submit" value="글쓰기">
+	        <input type="submit" value="글 수정하기">
 	    </form>
 	</fieldset>
 	

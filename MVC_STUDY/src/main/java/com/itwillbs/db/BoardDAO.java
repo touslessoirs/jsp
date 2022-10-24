@@ -275,24 +275,78 @@ public class BoardDAO {
 	// 게시글 수정 - updateBoard(DTO)
 
 	
-	// 게시글 삭제 - deleteBoard(DTO)
-	public int deleteBoard(BoardDTO dto) {
+	// 게시글 삭제 - deleteBoard(bno, pass)
+	public int deleteBoard(int bno, String pass) {
 		
 		int result = -1;
 		
 		try {
 			con = getConnection();
+			sql = "select pass from itwill_board where bno=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(pass.equals(rs.getString("pass"))) {
+					// 비밀번호 일치
+					sql = "delete from itwill_board where bno=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setInt(1, bno);
+					result = pstmt.executeUpdate();
+				} else {
+					// 비밀번호 불일치
+					result = 0;
+				}
+			} else {
+				// 게시판 글 없음
+				result = -1;
+			}
+			
+			System.out.println(" [DAO] 게시판 글 삭제 결과 ("+result+")");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			closeDB();
 		}
-		
+				
 		return result;
 		
 	}
-	// 게시글 삭제 - deleteBoard(DTO)
+	// 게시글 삭제 - deleteBoard(bno, pass)
 	
 
 	// 답글 쓰기 - reInsertBoard(DTO)
+	public void reInsertBoard(BoardDTO dto) {
+		
+		int bno = 0;
+		
+		try {
+			// 1) 글 번호 계산
+			con = getConnection();
+			sql = "select max(bno) from itwill_board";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				bno = rs.getInt("max(bno)")+1;
+			}
+			
+			// 2) 답글 순서 재배치
+			sql = "update itwill_board set re_seq=re_seq+1 "
+					+ "where re_ref=? and re_seq>?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, getre_ref);
+			pstmt.setInt(2, re_sez);
+			
+			
+			// 3) 답글 쓰기
+			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	// 답글 쓰기 - reInsertBoard(DTO)
 	
 }

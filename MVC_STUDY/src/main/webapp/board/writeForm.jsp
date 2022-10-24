@@ -10,13 +10,13 @@
 	<h1>writeForm (MVC).jsp</h1>
 
 	<fieldset>
-	    <form action="./BoardWriteAction.bo" method="post">
+	    <form action="./BoardWrite.bo" method="post">
 	        제목 : <input type="text" name="subject"><br>
 	        작성자 : <input type="text" name="name"><br>
 	        비밀번호 : <input type="password" name="pass"><br>
 	        내용 : <textarea rows="10" cols="20" name="content"></textarea>
 	        <hr>
-	        <input type="submit" value="글쓰기">
+	        <input type="submit" value="답글쓰기">
 	    </form>
 	</fieldset>
 

@@ -23,7 +23,8 @@ public class BoardListAction implements Action {
 		
 		String pageNum = request.getParameter("pageNum");
 		// 넘어온 페이지 정보 없으면 = 첫 글이면 => pageNum = 1
-		if(pageNum==null) {
+//		if(pageNum=="") {
+		if(pageNum==null || pageNum=="") {
 			pageNum = "1";
 		}
 		

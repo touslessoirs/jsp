@@ -9,5 +9,16 @@
 <body>
 	<h1>reWriteForm (MVC).jsp</h1>
 
+	<fieldset>
+	    <form action="./BoardReWriteAction.bo" method="post">
+	        제목 : <input type="text" name="subject" value="[답글] ${param.subject }"><br>
+	        작성자 : <input type="text" name="name"><br>
+	        비밀번호 : <input type="password" name="pass"><br>
+	        내용 : <textarea rows="10" cols="20" name="content"></textarea>
+	        <hr>
+	        <input type="submit" value="글쓰기">
+	    </form>
+	</fieldset>
+	
 </body>
 </html>

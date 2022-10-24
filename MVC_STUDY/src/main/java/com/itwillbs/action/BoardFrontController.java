@@ -67,8 +67,8 @@ public class BoardFrontController extends HttpServlet {
 		}	// BoardWriteAction.bo
 		
 		else if(command.equals("/BoardList.bo")) {
-		    System.out.println(" C : /BoardList.bo 호출");
-		    System.out.println(" C : [패턴3] DB사용 O, view페이지 출력");	// boardList.jsp
+		    System.out.println(" [C] /BoardList.bo 호출");
+		    System.out.println(" [C] [패턴3] DB사용 O, view 페이지 출력");	// boardList.jsp
 		    
 		    action = new BoardListAction();
 
@@ -82,7 +82,7 @@ public class BoardFrontController extends HttpServlet {
 		
 		else if(command.equals("/BoardContent.bo")) {
 		    System.out.println(" [C] /BoardContent.bo 호출");
-		    System.out.println(" [C] [패턴3] DB사용 O, view페이지 출력");	// boardContent.jsp
+		    System.out.println(" [C] [패턴3] DB사용 O, view 페이지 출력");	// boardContent.jsp
 
 		    action = new BoardContentAction();
 
@@ -96,7 +96,7 @@ public class BoardFrontController extends HttpServlet {
 		
 		else if(command.equals("/BoardUpdate.bo")) {
 			System.out.println(" [C] /BoardUpdate.bo 호출");
-		    System.out.println(" [C] [패턴3] DB사용 O, view페이지 출력");	// boardUpdate.jsp
+		    System.out.println(" [C] [패턴3] DB사용 O, view 페이지 출력");	// boardUpdate.jsp
 			
 			action = new BoardUpdateAction();
 			
@@ -122,10 +122,17 @@ public class BoardFrontController extends HttpServlet {
 			
 		}	// BoardUpdatePro.bo
 		
-		
-		
-		
 		else if(command.equals("/BoardDelete.bo")) {
+			System.out.println(" [C] /BoardDelete.bo 호출");
+			System.out.println(" [C] [패턴 1] DB사용 X, view 페이지 출력");	// deleteForm.jsp
+			
+			forward = new ActionForward();
+			forward.setPath("./board/deleteForm.jsp");
+			forward.setRedirect(false);
+			
+		}	// BoardDelete.bo
+		
+		else if(command.equals("/BoardDeleteAction.bo")){
 			System.out.println(" [C] /BoardDeleteAction.bo 호출");
 			System.out.println(" [C] [패턴 2] DB사용 O, 페이지 이동");	// BoardList로 이동
 			
@@ -137,10 +144,10 @@ public class BoardFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		}	// BoardDelete.bo
+		}	// BoardDeleteAction.bo
 		
 		else if(command.equals("/BoardReWrite.bo")) {
-			System.out.println(" [C] /ReWrite.bo 호출");
+			System.out.println(" [C] /BoardReWrite.bo 호출");
 			System.out.println(" [C] [패턴 1] DB사용 X, view 페이지 출력");	// reWriteForm.jsp
 			
 			forward = new ActionForward();
@@ -149,7 +156,19 @@ public class BoardFrontController extends HttpServlet {
 			
 		}	// BoardReWrite.bo
 		
-		
+		else if(command.equals("/BoardReWriteAction.bo")) {
+			System.out.println(" [C] /BoardReWriteAction.bo 호출");
+			System.out.println(" [C] [패턴 2] DB사용 O, 페이지 이동");	// BoardList로 이동
+
+			action = new BoardReWriteAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}	// BoardReWriteAction.bo
 		
 		
 		System.out.println(" [C] 2단계 : 가상주소 매핑 완료");
