@@ -328,23 +328,51 @@ public class BoardDAO {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				bno = rs.getInt("max(bno)")+1;
+				bno = rs.getInt(1)+1;
 			}
 			
-			// 2) 답글 순서 재배치
+			System.out.println(" [DAO] bno : "+bno);
+			
+			// 2) 기존 답글 순서 재배치
+			// 같은 그룹에 있으면서(re_ref=?) 기존의 re_seq보다 큰 값이 있을 때(re_seq>?)
+			// = 원글에 이전에 작성한 답글이 존재할 때
+			// => 기존의 답글을 한 칸씩 아래로(re_seq+1)
 			sql = "update itwill_board set re_seq=re_seq+1 "
 					+ "where re_ref=? and re_seq>?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, getre_ref);
-			pstmt.setInt(2, re_sez);
+			pstmt.setInt(1, dto.getRe_ref());
+			pstmt.setInt(2, dto.getRe_seq());
+			int cnt = pstmt.executeUpdate();
 			
+			if(cnt>0) {
+				System.out.println(" [DAO] 답글 재정렬 완료");
+			}
 			
 			// 3) 답글 쓰기
-			
-			
-			
+			sql = "insert into itwill_board(bno, name, pass, subject, content, "
+	                + "readcount, re_ref, re_lev, re_seq, date, ip, file) "
+	                + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, now(), ?, ?)";
+	        pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+	        pstmt.setString(2, dto.getName());
+	        pstmt.setString(3, dto.getPass());
+	        pstmt.setString(4, dto.getSubject());
+	        pstmt.setString(5, dto.getContent());
+	        pstmt.setInt(6, 0);
+	        pstmt.setInt(7, dto.getRe_ref());	// 원글과 동일
+	        pstmt.setInt(8, dto.getRe_lev()+1);
+	        pstmt.setInt(9, dto.getRe_seq()+1);
+	        pstmt.setString(10, dto.getIp());
+	        pstmt.setString(11, dto.getFile());
+	        
+	        pstmt.executeUpdate();
+	        
+	        System.out.println(" [DAO] 답글 쓰기 완료!");
+	        
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			closeDB();
 		}
 	}
 	// 답글 쓰기 - reInsertBoard(DTO)

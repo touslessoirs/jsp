@@ -11,6 +11,10 @@
 
 	<fieldset>
 	    <form action="./BoardReWriteAction.bo" method="post">
+	    	<input type="hidden" name="bno" value=${param.bno }>
+	    	<input type="hidden" name="re_ref" value=${param.re_ref }>
+	    	<input type="hidden" name="re_lev" value=${param.re_lev }>
+	    	<input type="hidden" name="re_seq" value=${param.re_seq }>
 	        제목 : <input type="text" name="subject" value="[답글] ${param.subject }"><br>
 	        작성자 : <input type="text" name="name"><br>
 	        비밀번호 : <input type="password" name="pass"><br>
