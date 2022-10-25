@@ -10,7 +10,8 @@
 	<h1>reWriteForm (MVC).jsp</h1>
 
 	<fieldset>
-	    <form action="./BoardReWriteAction.bo" method="post">
+		<!-- 주소줄에 담아 넘긴 정보이므로 param.pageNum -->
+	    <form action="./BoardReWriteAction.bo?pageNum=${param.pageNum }" method="post">
 	    	<input type="hidden" name="bno" value=${param.bno }>
 	    	<input type="hidden" name="re_ref" value=${param.re_ref }>
 	    	<input type="hidden" name="re_lev" value=${param.re_lev }>

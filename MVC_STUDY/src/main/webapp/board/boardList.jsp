@@ -27,7 +27,14 @@
 			<tr>
 				<td>${dto.bno }</td>
 				<td>
+					<c:if test="${dto.re_lev>0 }">
+						<img src="./img/level.gif" width="${dto.re_lev*5 }">
+						<img src="./img/re.gif">
+					</c:if>
 					<a href="./BoardContent.bo?bno=${dto.bno }&pageNum=${pageNum }">${dto.subject }</a>
+					<c:if test="${dto.file!=null }">
+						<img src="./img/save.png" width="15" height="15">
+					</c:if>
 				</td>
 		        <td>${dto.name }</td>
 		        <td>${dto.readcount }</td>

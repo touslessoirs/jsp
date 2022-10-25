@@ -21,10 +21,13 @@
     <fullyQualifiedTypeName name="javax.sql.DataSource"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="com.itwillbs.db.BoardDTO"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="com.itwillbs.action.Action"/>
-    <fullyQualifiedTypeName name="com.itwillbs.db.BoardDAO"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="com.itwillbs.action.ActionForward"/>
+    <fullyQualifiedTypeName name="com.itwillbs.db.BoardDTO"/>
+    <fullyQualifiedTypeName name="com.itwillbs.db.BoardDAO"/>
+    <fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
+    <fullyQualifiedTypeName name="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"/>
+    <fullyQualifiedTypeName name="com.oreilly.servlet.MultipartRequest"/>
 </qualifiedTypeNameHistroy>

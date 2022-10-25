@@ -24,6 +24,7 @@ public class BoardUpdateAction implements Action {
 		
 		// DTO => request 영역에 저장 (=> view 출력)
 		request.setAttribute("dto", dto);
+		request.setAttribute("pageNum", pageNum);
 		
 		// 페이지 이동
 		ActionForward forward = new ActionForward();

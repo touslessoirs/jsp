@@ -23,8 +23,7 @@ public class BoardListAction implements Action {
 		
 		String pageNum = request.getParameter("pageNum");
 		// 넘어온 페이지 정보 없으면 = 첫 글이면 => pageNum = 1
-//		if(pageNum=="") {
-		if(pageNum==null || pageNum=="") {
+		if(pageNum==null) {
 			pageNum = "1";
 		}
 		
@@ -39,7 +38,7 @@ public class BoardListAction implements Action {
 		// 나머지가 있을 경우 페이지 수+1
 		int pageCount = (cnt/pageSize)+(cnt%pageSize==0?0:1);
 		
-		int pageBlock = 1;
+		int pageBlock = 3;
 		int startPage = ((currentPage-1)/pageBlock)*pageBlock+1;
 		int endPage = startPage+pageBlock-1;
 		// 만약 글 갯수가 한 페이지를 다 채우지 못한다면

@@ -195,6 +195,16 @@ public class BoardFrontController extends HttpServlet {
 			
 		}	// BoardFileWriteAction.bo
 		
+		else if(command.equals("/BoardFileDown.bo")) {
+			System.out.println(" [C] /BoardFileDownAction.bo 호출");
+			System.out.println(" [C] [패턴 1] DB사용 X, view 페이지 출력");
+
+			forward = new ActionForward();
+			forward.setPath("./file/fileDown.jsp");
+			forward.setRedirect(false);
+			
+		}	// BoardFileDown.bo
+		
 		System.out.println(" [C] 2단계 : 가상주소 매핑 완료");
 		
 		//================2. 가상주소 매핑================

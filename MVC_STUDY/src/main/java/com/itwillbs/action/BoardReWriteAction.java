@@ -16,6 +16,7 @@ public class BoardReWriteAction implements Action {
 		// 한글 처리 생략
 		// 전달 정보 저장
 		String pageNum = request.getParameter("pageNum");
+		System.out.println("@@@@@@"+pageNum);
 		BoardDTO dto = new BoardDTO();
 		dto.setBno(Integer.parseInt(request.getParameter("bno")));
 		dto.setRe_ref(Integer.parseInt(request.getParameter("re_ref")));
@@ -25,13 +26,14 @@ public class BoardReWriteAction implements Action {
 		dto.setName(request.getParameter("name"));
 		dto.setPass(request.getParameter("pass"));
 		dto.setContent(request.getParameter("content"));
+		dto.setIp(request.getRemoteAddr());
 		
 		// 답글 작성
 		BoardDAO dao = new BoardDAO();
 		dao.reInsertBoard(dto);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("./BoardList.bo?pageNum"+pageNum);
+		forward.setPath("./BoardList.bo?pageNum="+pageNum);
 		forward.setRedirect(true);
 		
 		return forward;

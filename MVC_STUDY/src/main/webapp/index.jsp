@@ -10,7 +10,7 @@
 
 	<%
 // 		response.sendRedirect("./BoardWrite.bo");
-	response.sendRedirect("./BoardList.bo");
+		response.sendRedirect("./BoardList.bo");
 	%>
 
 </body>

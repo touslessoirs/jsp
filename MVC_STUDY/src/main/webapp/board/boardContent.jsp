@@ -33,13 +33,16 @@
 		</tr>
 		<tr>
 			<td>첨부파일</td>
-			<td colspan="3">${dto.file }</td>
+			<td colspan="3">
+				<a href="./BoardFileDown.bo?file_name=${dto.file }">${dto.file }</a>
+				<a href="./upload/${dto.file }">${dto.file }</a>
+			</td>
 		</tr>
 		<tr>
 	        <td colspan="4">
 	            <input type="button" value="수정" onclick="location.href='./BoardUpdate.bo?bno=${dto.bno }&pageNum=${pageNum }';">
 				<input type="button" value="삭제" onclick="location.href='./BoardDelete.bo?bno=${dto.bno }&pageNum=${pageNum }';">
-	            <input type="button" value="답글" onclick="location.href='./BoardReWrite.bo?subject=${dto.subject }&bno=${dto.bno }&re_ref=${dto.re_ref}&re_lev=${dto.re_lev }&re_seq=${dto.re_seq }';">
+	            <input type="button" value="답글" onclick="location.href='./BoardReWrite.bo?subject=${dto.subject }&pageNum=${pageNum }&bno=${dto.bno }&re_ref=${dto.re_ref}&re_lev=${dto.re_lev }&re_seq=${dto.re_seq }';">
 	            <!-- 조회중이었던 페이지로 돌아가기 -->
 	            <input type="button" value="목록" onclick="location.href='./BoardList.bo?pageNum=${pageNum }';">
 	        </td>
