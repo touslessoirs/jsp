@@ -32,7 +32,7 @@ public class BoardContentAction implements Action {
 		
 		// 페이지 이동
 		ActionForward forward = new ActionForward();
-		forward.setPath("./board/boardContent.jsp?pageNum"+pageNum);
+		forward.setPath("./board/boardContent.jsp");
 		forward.setRedirect(false);	// request -> 포워딩
 
 		return forward;

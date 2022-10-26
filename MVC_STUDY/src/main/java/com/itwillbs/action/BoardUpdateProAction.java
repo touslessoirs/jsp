@@ -35,12 +35,12 @@ public class BoardUpdateProAction implements Action {
 			ActionForward forward = new ActionForward();
 			forward.setPath("./BoardList.bo?pageNum="+pageNum);
 			forward.setRedirect(true);
+//			out.close();
 			return forward;
 //			out.print("<script>");
 //			out.print("alert('수정 완료!'");
-//			out.print("location.href='./BoardList.bo?pageNum="+pageNum+"';");	// 이동완료
+//			out.print("location.href='./BoardList.bo?pageNum="+pageNum"';");	// 이동완료
 //			out.print("</script>");
-//			out.close();
 //			return null;
 		} else if(result == 0) {
 			out.print("<script>");

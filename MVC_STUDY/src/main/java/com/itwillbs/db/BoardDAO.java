@@ -168,6 +168,28 @@ public class BoardDAO {
 	}
 	// 글 목록 조회하기 - getBoardList(startRow, pageSize)
 	
+
+	// 조회수 1 증가 - updateReadcount(bno)
+	public void updateReadcount(int bno) {
+		
+		try {
+			con = getConnection();
+			sql = "update itwill_board set readcount=readcount+1 where bno=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			pstmt.executeUpdate();
+			
+			System.out.println(" [DAO] 조회수 1 증가");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+	}
+	// 조회수 1 증가 - updateReadcount(bno)
+	
 	
 	// 글 내용 조회하기 - getBoardContent(bno)
 	public BoardDTO getBoardContent(int bno) {
@@ -207,28 +229,6 @@ public class BoardDAO {
 		return dto;
 	}
 	// 글 내용 조회하기 - getBoardContent(bno)
-	
-	
-	// 조회수 1 증가 - updateReadcount(bno)
-	public void updateReadcount(int bno) {
-		
-		try {
-			con = getConnection();
-			sql = "update itwill_board set readcount=readcount+1 where bno=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, bno);
-			pstmt.executeUpdate();
-			
-			System.out.println(" [DAO] 조회수 1 증가");
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			closeDB();
-		}
-		
-	}
-	// 조회수 1 증가 - updateReadcount(bno)
 	
 	
 	// 게시글 수정 - updateBoard(DTO)

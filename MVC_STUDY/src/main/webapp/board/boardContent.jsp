@@ -35,7 +35,7 @@
 			<td>첨부파일</td>
 			<td colspan="3">
 				<a href="./BoardFileDown.bo?file_name=${dto.file }">${dto.file }</a>
-				<a href="./upload/${dto.file }">${dto.file }</a>
+<%-- 				<a href="./upload/${dto.file }">${dto.file }</a> --%>
 			</td>
 		</tr>
 		<tr>

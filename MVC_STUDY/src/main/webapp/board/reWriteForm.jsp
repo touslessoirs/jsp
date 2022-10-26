@@ -21,7 +21,7 @@
 	        비밀번호 : <input type="password" name="pass"><br>
 	        내용 : <textarea rows="10" cols="20" name="content"></textarea>
 	        <hr>
-	        <input type="submit" value="글쓰기">
+	        <input type="submit" value="답글쓰기">
 	    </form>
 	</fieldset>
 	
