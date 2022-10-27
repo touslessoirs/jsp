@@ -210,7 +210,6 @@ public class BoardFrontController extends HttpServlet {
 		//================2. 가상주소 매핑================
 		
 		
-		
 		//================3. 페이지 이동================
 		
 		System.out.println("\n [C] 3단계 : 페이지 이동 시작");
